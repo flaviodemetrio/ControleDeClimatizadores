@@ -1,0 +1,50 @@
+@model IEnumerable<ClienteModel>
+@{
+    ViewBag.Subtitulo = "Listagem de Cliente";
+}
+
+<header class="d-flex justify-content-between align-items-center">
+    <div>
+        <h1 class="text-primary">@ViewBag.Subtitulo</h1>
+    </div>
+    <div>
+        <a asp-action="Cadastrar" class="btn btn-primary">Novo Cliente</a>
+    </div>
+</header>
+<hr>
+
+<partial name="_Mensagem"></partial>
+
+@if (Model.Count() > 0)
+{
+    <table class="table table-striped tabela-btn-acao-esquerda">
+        <thead>
+            <tr>
+                <th>Razão Social</th>
+                <th>Fantasia</th>
+                <th>Cnpj</th>
+                <th>Cidade</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cliente in Model)
+            {
+                <tr>
+                    <td>@cliente.RazaoSocial</td>
+                    <td>@cliente.Fantasia</td>
+                    <td>@cliente.Cnpj</td>
+                    <td>@cliente.Cidade</td>
+                    <td>
+                        <a asp-action="Alterar" asp-route-id="@cliente.IdCliente"class="btn btn-sm btn-secondary">Alterar</a>
+                        <a asp-action="Excluir" asp-route-id="@cliente.IdCliente" class="btn btn-sm btn-danger">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>Não há nenhuma categoria cadastrada.</p>
+}

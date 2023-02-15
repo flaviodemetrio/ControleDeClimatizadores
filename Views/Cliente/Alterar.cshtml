@@ -1,0 +1,81 @@
+@model ClienteModel
+@{
+    ViewBag.Subtitulo = "Cadastrar Cliente";
+}
+
+<header class="d-flex justify-content-between align-items-center">
+    <div>
+        <h1 class="text-primary">@ViewBag.Subtitulo</h1>
+    </div>
+    
+</header>
+<hr>
+
+<form asp-action="Alterar" class="row">
+    <input type="hidden" asp-for="@Model.IdCliente">
+    <div class="form-group col-sm-8 col-lg-2">
+        <label asp-for="@Model.Cnpj">Cnpj:</label><br>
+        <input asp-for="@Model.Cnpj" class="form-control" autofocus>
+        <span asp-validation-for="@Model.Cnpj" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group col-sm-8 col-lg-7">
+        <label asp-for="@Model.RazaoSocial">Razão Social:</label><br>
+        <input asp-for="@Model.RazaoSocial" class="form-control" autofocus>
+        <span asp-validation-for="@Model.RazaoSocial" class="text-danger"></span>
+    </div>
+        
+    <div class="form-group col-sm-8 col-lg-3">
+        <label asp-for="@Model.Fantasia">Razão Fantasia:</label><br>
+        <input asp-for="@Model.Fantasia" class="form-control" autofocus>
+        <span asp-validation-for="@Model.Fantasia" class="text-danger"></span>
+    </div>
+
+    
+    <div class="form-group col-sm-8 col-lg-2">
+        <label asp-for="@Model.Cep">Cep:</label><br>
+        <input asp-for="@Model.Cep" class="form-control" autofocus>
+        <span asp-validation-for="@Model.Cep" class="text-danger"></span>
+    </div>
+
+    <div class="form-group col-sm-8 col-lg-9">
+        <label asp-for="@Model.Endereco">Endereço:</label><br>
+        <input asp-for="@Model.Endereco" class="form-control" autofocus>
+        <span asp-validation-for="@Model.Endereco" class="text-danger"></span>
+    </div>
+
+    <div class="form-group col-sm-8 col-lg-1">
+        <label asp-for="@Model.numero">Numero:</label><br>
+        <input asp-for="@Model.numero" class="form-control" autofocus>
+        <span asp-validation-for="@Model.numero" class="text-danger"></span>
+    </div>
+    
+    <div class="form-group col-sm-8 col-lg-4">
+        <label asp-for="@Model.Complemento">Complemento:</label><br>
+        <input asp-for="@Model.Complemento" class="form-control" autofocus>
+        <span asp-validation-for="@Model.Complemento" class="text-danger"></span>
+    </div>
+       
+    <div class="form-group col-sm-8 col-lg-4">
+        <label asp-for="@Model.Bairro">Bairro:</label><br>
+        <input asp-for="@Model.Bairro" class="form-control" autofocus>
+        <span asp-validation-for="@Model.Bairro" class="text-danger"></span>
+    </div>
+      
+    <div class="form-group col-sm-8 col-lg-3">
+        <label asp-for="@Model.Cidade">Cidade:</label><br>
+        <input asp-for="@Model.Cidade" class="form-control" autofocus>
+        <span asp-validation-for="@Model.Cidade" class="text-danger"></span>
+    </div>
+      
+    <div class="form-group col-sm-8 col-lg-1">
+        <label asp-for="@Model.Estado">Estado:</label><br>
+        <input asp-for="@Model.Estado" class="form-control" autofocus>
+        <span asp-validation-for="@Model.Estado" class="text-danger"></span>
+    </div>
+
+    <div class="mt-3">
+        <a asp-action="Index" class="btn btn-outline-secondary">Cancelar</a>
+        <button class="btn btn-primary" type="submit">Salvar</button>
+    </div>
+</form>

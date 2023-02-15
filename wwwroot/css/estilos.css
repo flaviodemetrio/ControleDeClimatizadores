@@ -1,0 +1,7 @@
+.tabela-btn-acao-esquerda tr > th:last-child,
+.tabela-btn-acao-esquerda tr > td:last-child
+{
+    width: 1%;
+    white-space: nowrap;
+    text-align: center;
+}
