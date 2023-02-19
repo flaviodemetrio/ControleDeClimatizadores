@@ -1,0 +1,43 @@
+@model IEnumerable<MovimentoModel> 
+@{
+    ViewBag.Subtitulo = "Movimento de Saída de Climatizadores";
+}
+
+<header class="d-flex justify-content-between align-items-center">
+    <div>
+        <h1 class="text-primary">@ViewBag.Subtitulo</h1>
+    </div>
+    <div>
+        <a asp-action="Cadastrar" class="btn btn-primary">Nova Saída</a>
+    </div>
+</header>
+<hr>
+
+<partial name="_Mensagem"></partial>
+
+
+<table class="table table-striped tabela-btn-acao-esquerda">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Número Contrato</th>
+          
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movimento in Model)
+        {
+            <tr>
+                <td>@movimento.cliente.Fantasia</td>
+                <td>@movimento.NumeroContrato</td>
+       
+                <td>
+                    <a asp-action="Alterar" asp-route-id="@movimento.IdMovimento"
+                        class="btn btn-sm btn-secondary">Alterar</a>
+                    <a asp-action="Excluir" asp-route-id="@movimento.IdMovimento" class="btn btn-sm btn-danger">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
