@@ -6,10 +6,17 @@ namespace EstoqueWeb.Models
     {
         public DbSet<ClienteModel> Clientes{get;set;}
         public DbSet<EquipamentoModel> Equipamentos{get;set;}
+        public DbSet<MovimentoModel> Movimentos{get;set;}
 
         public EstoqueWebContext(DbContextOptions<EstoqueWebContext> options): base(options)
         {
-            
-        }        
+             
+                        
+        }
+
+     
+
+     
+
     }    
 }

@@ -56,16 +56,81 @@ namespace CrudProdutos.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Movimentos",
+                columns: table => new
+                {
+                    IdMovimento = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    DataMovimento = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    TipoMovimento = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
+                    NumeroContrato = table.Column<string>(type: "TEXT", nullable: true),
+                    clienteIdCliente = table.Column<int>(type: "INTEGER", nullable: true),
+                    InicioLocacao = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    FimLocacao = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    Obs = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Movimentos", x => x.IdMovimento);
+                    table.ForeignKey(
+                        name: "FK_Movimentos_Clientes_clienteIdCliente",
+                        column: x => x.clienteIdCliente,
+                        principalTable: "Clientes",
+                        principalColumn: "IdCliente",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "EquipamentoModelMovimentoModel",
+                columns: table => new
+                {
+                    EquipamentosModelIdEquipamento = table.Column<int>(type: "INTEGER", nullable: false),
+                    MovimentosModelIdMovimento = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EquipamentoModelMovimentoModel", x => new { x.EquipamentosModelIdEquipamento, x.MovimentosModelIdMovimento });
+                    table.ForeignKey(
+                        name: "FK_EquipamentoModelMovimentoModel_Equipamentos_EquipamentosModelIdEquipamento",
+                        column: x => x.EquipamentosModelIdEquipamento,
+                        principalTable: "Equipamentos",
+                        principalColumn: "IdEquipamento",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EquipamentoModelMovimentoModel_Movimentos_MovimentosModelIdMovimento",
+                        column: x => x.MovimentosModelIdMovimento,
+                        principalTable: "Movimentos",
+                        principalColumn: "IdMovimento",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_EquipamentoModelMovimentoModel_MovimentosModelIdMovimento",
+                table: "EquipamentoModelMovimentoModel",
+                column: "MovimentosModelIdMovimento");
+
             migrationBuilder.CreateIndex(
                 name: "IX_Equipamentos_clienteIdCliente",
                 table: "Equipamentos",
+                column: "clienteIdCliente");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Movimentos_clienteIdCliente",
+                table: "Movimentos",
                 column: "clienteIdCliente");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "EquipamentoModelMovimentoModel");
+
+            migrationBuilder.DropTable(
                 name: "Equipamentos");
+
+            migrationBuilder.DropTable(
+                name: "Movimentos");
 
             migrationBuilder.DropTable(
                 name: "Clientes");

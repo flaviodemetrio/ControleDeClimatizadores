@@ -1,0 +1,40 @@
+Listar versoes sdks instaladas
+dotnet --list-sdks
+
+* Iniciar projeto
+criar globaljason
+dotnet new globaljson --sdk-version 5.0.403
+
+* Instalar bootstrap
+libman init -p jsdelivr
+libman install bootstrap -d wwwroot/lib/bootstrap5
+
+* instalação de pacotes
+shift+ctrl+p
+Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation	Unknown	5.0.9	
+Microsoft.EntityFrameworkCore.Design	Unknown	5.0.9	
+Microsoft.EntityFrameworkCore.Sqlite	Unknown	5.0.9	
+Newtonsoft.Json	Unknown	13.0.1
+
+* Atalhos VSCode
+ctrl+' :abrir terminal
+ctrl+Shift+p :comandos
+
+* EF Core
+Verificar versão
+dotnet ef --version
+
+Desinstalar EF Core
+dotnet tool uninstall --global dotnet-ef
+
+Instalar EF Core
+dotnet tool install --global dotnet-ef --version 5.0.9
+
+Criar Migraçõe
+dotnet ef migrations add nome
+
+
+
+
+------------------------------------
+Min 00:30:00

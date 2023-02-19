@@ -1,8 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EstoqueWeb.Models
 {
+    [ Table ("Equipamentos" )]
     public class EquipamentoModel
     {
         [Key]
@@ -20,7 +23,9 @@ namespace EstoqueWeb.Models
         public ClienteModel cliente { get; set; }
         public DateTime? InicioLocacao { get; set; }
         public DateTime? FimLocacao { get; set; }
-        public string Obs { get; set; }    
+        public string Obs { get; set; }   
+        public ICollection<MovimentoModel> MovimentosModel { get; set; }
+         
 
 
         public EquipamentoModel()

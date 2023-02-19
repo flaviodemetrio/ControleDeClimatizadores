@@ -16,6 +16,21 @@ namespace CrudProdutos.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.9");
 
+            modelBuilder.Entity("EquipamentoModelMovimentoModel", b =>
+                {
+                    b.Property<int>("EquipamentosModelIdEquipamento")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MovimentosModelIdMovimento")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("EquipamentosModelIdEquipamento", "MovimentosModelIdMovimento");
+
+                    b.HasIndex("MovimentosModelIdMovimento");
+
+                    b.ToTable("EquipamentoModelMovimentoModel");
+                });
+
             modelBuilder.Entity("EstoqueWeb.Models.ClienteModel", b =>
                 {
                     b.Property<int>("IdCliente")
@@ -125,7 +140,67 @@ namespace CrudProdutos.Migrations
                     b.ToTable("Equipamentos");
                 });
 
+            modelBuilder.Entity("EstoqueWeb.Models.MovimentoModel", b =>
+                {
+                    b.Property<int>("IdMovimento")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime?>("DataMovimento")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("FimLocacao")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime?>("InicioLocacao")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NumeroContrato")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Obs")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TipoMovimento")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("clienteIdCliente")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("IdMovimento");
+
+                    b.HasIndex("clienteIdCliente");
+
+                    b.ToTable("Movimentos");
+                });
+
+            modelBuilder.Entity("EquipamentoModelMovimentoModel", b =>
+                {
+                    b.HasOne("EstoqueWeb.Models.EquipamentoModel", null)
+                        .WithMany()
+                        .HasForeignKey("EquipamentosModelIdEquipamento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EstoqueWeb.Models.MovimentoModel", null)
+                        .WithMany()
+                        .HasForeignKey("MovimentosModelIdMovimento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("EstoqueWeb.Models.EquipamentoModel", b =>
+                {
+                    b.HasOne("EstoqueWeb.Models.ClienteModel", "cliente")
+                        .WithMany()
+                        .HasForeignKey("clienteIdCliente");
+
+                    b.Navigation("cliente");
+                });
+
+            modelBuilder.Entity("EstoqueWeb.Models.MovimentoModel", b =>
                 {
                     b.HasOne("EstoqueWeb.Models.ClienteModel", "cliente")
                         .WithMany()
