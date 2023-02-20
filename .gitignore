@@ -2,6 +2,7 @@
 # compiled source #
 ###################
 anotacoes.txt	
+estoque.db
 *.com
 *.class
 *.dll
