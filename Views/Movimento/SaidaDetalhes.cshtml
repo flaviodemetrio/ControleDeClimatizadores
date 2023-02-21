@@ -1,0 +1,99 @@
+@model EstoqueWeb.Models.MovimentoModel;
+
+@{
+    ViewData["Title"] = "Detalhes";
+}
+
+<h3 class="pt-3">Detalhes </h3>
+<hr />
+
+<div>
+    <!--Jumbotron-->
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h2 class="display-4">Saída de Climatizador</h2>
+            <hr class="my-4">
+
+            <!--Conteudo -->
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.IdMovimento)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.IdMovimento)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.cliente.RazaoSocial)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.cliente.RazaoSocial)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DataMovimento)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DataMovimento)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.NumeroContrato)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.NumeroContrato)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.InicioLocacao)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.InicioLocacao)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.FimLocacao)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.FimLocacao)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Obs)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Obs)
+                </dd>
+                <dt class="col-sm-2">
+                    Climatizadores
+                </dt>
+                <dd class="col-sm-10">
+                    @foreach (var item in Model.EquipamentosModel)
+                    {
+                        <a>@item.Modelo - Tag @item.Tag </a>
+                        <br>
+                    }
+
+                </dd>
+
+            </dl>
+
+            <!--botão-->
+            <div>
+                <a asp-action="Saida" class="btn btn-dark"> <i class="fa fa-list-alt"></i> Voltar a Lista </a>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

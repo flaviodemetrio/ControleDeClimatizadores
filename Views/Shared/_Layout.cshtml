@@ -9,19 +9,21 @@
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/lib/bootstrap5/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/css/estilos.css">
-         
-    <title>EstoqueWeb:: @ViewBag.Subtitulo</title>
+
+    <title>Controle:: @ViewBag.Subtitulo</title>
 </head>
+
 <body>
-       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="/">EstoqueWeb</a>
+            <a class="navbar-brand" href="/">Controle Climatizadores</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -29,7 +31,12 @@
                 <div class="navbar-nav ms-auto">
                     <a class="nav-link @classeMenuPrincipal" asp-controller="Home" asp-action="Index">Principal</a>
                     <a class="nav-link @classeMenuProdutos" asp-controller="Cliente" asp-action="Index">Clientes</a>
-                    <a class="nav-link @classeMenuCategorias" asp-controller="Equipamento"asp-action="Index">Climatizadores</a>
+                    <a class="nav-link @classeMenuCategorias" asp-controller="Equipamento"
+                        asp-action="Index">Climatizadores</a>
+                    <a class="nav-link @classeMenuCategorias" asp-controller="Movimento" asp-action="Saida">Saída</a>
+                    <a class="nav-link @classeMenuCategorias" asp-controller="Equipamento"
+                        asp-action="Index">Entrada</a>
+
                 </div>
             </div>
         </div>
@@ -39,9 +46,7 @@
     <div class="container mt-2">
         @RenderBody()
     </div>
-    <div>
-        <p>teste</p>
-    </div>
+
 
     <div class="text-light bg-dark p-3 fixed-bottom text-center">
         EstoqueWeb&copy; @DateTime.Now.Year.ToString()<br>

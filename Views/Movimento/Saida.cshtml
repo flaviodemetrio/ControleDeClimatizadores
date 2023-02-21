@@ -1,4 +1,4 @@
-@model IEnumerable<MovimentoModel> 
+@model IEnumerable<MovimentoModel>
 @{
     ViewBag.Subtitulo = "Movimento de Saída de Climatizadores";
 }
@@ -20,8 +20,11 @@
     <thead>
         <tr>
             <th>Cliente</th>
+            <th>Data do Movimento</th>
             <th>Número Contrato</th>
-          
+            <th>Início da Locação</th>
+            <th>Fim da Locação</th>
+
             <th>Ações</th>
         </tr>
     </thead>
@@ -30,12 +33,17 @@
         {
             <tr>
                 <td>@movimento.cliente.Fantasia</td>
+                <td>@movimento.DataMovimento</td>
                 <td>@movimento.NumeroContrato</td>
-       
+                <td>@movimento.InicioLocacao</td>
+                <td>@movimento.FimLocacao</td>
                 <td>
-                    <a asp-action="Alterar" asp-route-id="@movimento.IdMovimento"
-                        class="btn btn-sm btn-secondary">Alterar</a>
-                    <a asp-action="Excluir" asp-route-id="@movimento.IdMovimento" class="btn btn-sm btn-danger">Excluir</a>
+                    <a asp-action="SaidaDetalhes" asp-route-id="@movimento.IdMovimento"
+                        class="btn btn-sm btn-secondary">Detalhes</a>
+
+
+
+
                 </td>
             </tr>
         }
