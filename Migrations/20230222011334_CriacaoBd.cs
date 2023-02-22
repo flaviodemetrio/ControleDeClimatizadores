@@ -1,9 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CrudProdutos.Migrations
 {
-    public partial class criacaobd : Migration
+    public partial class CriacaoBd : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,7 +10,7 @@ namespace CrudProdutos.Migrations
                 name: "Clientes",
                 columns: table => new
                 {
-                    IdCliente = table.Column<int>(type: "INTEGER", nullable: false)
+                    ClienteId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Cnpj = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
                     RazaoSocial = table.Column<string>(type: "TEXT", maxLength: 80, nullable: false),
@@ -26,99 +25,84 @@ namespace CrudProdutos.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Clientes", x => x.IdCliente);
+                    table.PrimaryKey("PK_Clientes", x => x.ClienteId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Equipamentos",
                 columns: table => new
                 {
-                    IdEquipamento = table.Column<int>(type: "INTEGER", nullable: false)
+                    EquipamentoId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Tag = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
                     Modelo = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
                     Status = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
                     Operando = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    NumeroContrato = table.Column<string>(type: "TEXT", maxLength: 20, nullable: true),
-                    clienteIdCliente = table.Column<int>(type: "INTEGER", nullable: true),
-                    InicioLocacao = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    FimLocacao = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    Obs = table.Column<string>(type: "TEXT", nullable: true)
+                    Obs = table.Column<string>(type: "TEXT", maxLength: 20, nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Equipamentos", x => x.IdEquipamento);
-                    table.ForeignKey(
-                        name: "FK_Equipamentos_Clientes_clienteIdCliente",
-                        column: x => x.clienteIdCliente,
-                        principalTable: "Clientes",
-                        principalColumn: "IdCliente",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_Equipamentos", x => x.EquipamentoId);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Movimentos",
                 columns: table => new
                 {
-                    IdMovimento = table.Column<int>(type: "INTEGER", nullable: false)
+                    MovimentoId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    DataMovimento = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    DataMovimento = table.Column<string>(type: "TEXT", nullable: true),
                     TipoMovimento = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    NumeroContrato = table.Column<string>(type: "TEXT", nullable: true),
-                    clienteIdCliente = table.Column<int>(type: "INTEGER", nullable: true),
-                    InicioLocacao = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    FimLocacao = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    NumeroContrato = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
+                    ClienteId = table.Column<int>(type: "INTEGER", nullable: false),
+                    InicioLocacao = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
+                    FimLocacao = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
                     Obs = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Movimentos", x => x.IdMovimento);
+                    table.PrimaryKey("PK_Movimentos", x => x.MovimentoId);
                     table.ForeignKey(
-                        name: "FK_Movimentos_Clientes_clienteIdCliente",
-                        column: x => x.clienteIdCliente,
+                        name: "FK_Movimentos_Clientes_ClienteId",
+                        column: x => x.ClienteId,
                         principalTable: "Clientes",
-                        principalColumn: "IdCliente",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "ClienteId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "EquipamentoModelMovimentoModel",
                 columns: table => new
                 {
-                    EquipamentosModelIdEquipamento = table.Column<int>(type: "INTEGER", nullable: false),
-                    MovimentosModelIdMovimento = table.Column<int>(type: "INTEGER", nullable: false)
+                    EquipamentosModelEquipamentoId = table.Column<int>(type: "INTEGER", nullable: false),
+                    MovimentosModelMovimentoId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EquipamentoModelMovimentoModel", x => new { x.EquipamentosModelIdEquipamento, x.MovimentosModelIdMovimento });
+                    table.PrimaryKey("PK_EquipamentoModelMovimentoModel", x => new { x.EquipamentosModelEquipamentoId, x.MovimentosModelMovimentoId });
                     table.ForeignKey(
-                        name: "FK_EquipamentoModelMovimentoModel_Equipamentos_EquipamentosModelIdEquipamento",
-                        column: x => x.EquipamentosModelIdEquipamento,
+                        name: "FK_EquipamentoModelMovimentoModel_Equipamentos_EquipamentosModelEquipamentoId",
+                        column: x => x.EquipamentosModelEquipamentoId,
                         principalTable: "Equipamentos",
-                        principalColumn: "IdEquipamento",
+                        principalColumn: "EquipamentoId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EquipamentoModelMovimentoModel_Movimentos_MovimentosModelIdMovimento",
-                        column: x => x.MovimentosModelIdMovimento,
+                        name: "FK_EquipamentoModelMovimentoModel_Movimentos_MovimentosModelMovimentoId",
+                        column: x => x.MovimentosModelMovimentoId,
                         principalTable: "Movimentos",
-                        principalColumn: "IdMovimento",
+                        principalColumn: "MovimentoId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_EquipamentoModelMovimentoModel_MovimentosModelIdMovimento",
+                name: "IX_EquipamentoModelMovimentoModel_MovimentosModelMovimentoId",
                 table: "EquipamentoModelMovimentoModel",
-                column: "MovimentosModelIdMovimento");
+                column: "MovimentosModelMovimentoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Equipamentos_clienteIdCliente",
-                table: "Equipamentos",
-                column: "clienteIdCliente");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Movimentos_clienteIdCliente",
+                name: "IX_Movimentos_ClienteId",
                 table: "Movimentos",
-                column: "clienteIdCliente");
+                column: "ClienteId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

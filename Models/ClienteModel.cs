@@ -7,7 +7,7 @@ namespace EstoqueWeb.Models
     public class ClienteModel
     {
         [Key]
-        public int IdCliente { get; set; }
+        public int ClienteId { get; set; }
         [Required, MaxLength(20)]
         public string Cnpj { get; set; }
         [Required, MaxLength(80)]

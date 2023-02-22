@@ -5,11 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EstoqueWeb.Models
 {
-    [ Table ("Equipamentos" )]
+    [Table("Equipamentos")]
     public class EquipamentoModel
     {
         [Key]
-        public int IdEquipamento { get; set; }
+        public int EquipamentoId{ get; set; }
         [Required, MaxLength(20)]
         public string Tag { get; set; }
         [Required, MaxLength(100)]
@@ -19,14 +19,8 @@ namespace EstoqueWeb.Models
         [Required, MaxLength(20)]
         public string Operando { get; set; }
         [MaxLength(20)]
-        public string NumeroContrato { get; set; }
-        public ClienteModel cliente { get; set; }
-        public DateTime? InicioLocacao { get; set; }
-        public DateTime? FimLocacao { get; set; }
-        public string Obs { get; set; }   
+        public string Obs { get; set; }
         public ICollection<MovimentoModel> MovimentosModel { get; set; }
-         
-
 
         public EquipamentoModel()
         {
@@ -34,5 +28,5 @@ namespace EstoqueWeb.Models
             this.Operando = "Sim";
         }
 
-    }    
+    }
 }

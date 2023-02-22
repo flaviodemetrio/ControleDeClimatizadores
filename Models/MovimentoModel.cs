@@ -9,13 +9,17 @@ namespace EstoqueWeb.Models
     public class MovimentoModel
     {
         [Key]
-        public int IdMovimento { get; set; }
+        public int MovimentoId { get; set; }
         public string DataMovimento { get; set; }
         [Required, MaxLength(20)]
         public string TipoMovimento { get; set; }
+        [Required, MaxLength(20)]
         public string NumeroContrato { get; set; }
+        public int ClienteId { get; set; }
         public ClienteModel cliente { get; set; }
+        [Required, MaxLength(20)]
         public string InicioLocacao { get; set; }
+        [Required, MaxLength(20)]
         public string FimLocacao { get; set; }
         public string Obs { get; set; }
         public ICollection<EquipamentoModel> EquipamentosModel { get; set; }

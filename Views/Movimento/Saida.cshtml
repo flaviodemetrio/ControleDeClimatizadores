@@ -8,7 +8,7 @@
         <h1 class="text-primary">@ViewBag.Subtitulo</h1>
     </div>
     <div>
-        <a asp-action="Cadastrar" class="btn btn-primary">Nova Saída</a>
+        <a asp-action="SaidaNovo" class="btn btn-primary">Nova Saída</a>
     </div>
 </header>
 <hr>
@@ -38,7 +38,7 @@
                 <td>@movimento.InicioLocacao</td>
                 <td>@movimento.FimLocacao</td>
                 <td>
-                    <a asp-action="SaidaDetalhes" asp-route-id="@movimento.IdMovimento"
+                    <a asp-action="SaidaDetalhes" asp-route-id="@movimento.MovimentoId"
                         class="btn btn-sm btn-secondary">Detalhes</a>
 
 

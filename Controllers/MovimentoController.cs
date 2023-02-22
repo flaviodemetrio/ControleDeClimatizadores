@@ -1,7 +1,9 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using EstoqueWeb.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace EstoqueWeb.Controllers
@@ -15,14 +17,11 @@ namespace EstoqueWeb.Controllers
             this._context = context;
         }
 
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View(await _context.Movimentos.OrderBy(r => r.TipoMovimento).AsNoTracking().ToListAsync());
-        //}
-
         public async Task<IActionResult> Saida()
         {
-            var applicationDbContext = _context.Movimentos.Include(m => m.cliente).Where(m => m.TipoMovimento == "saida");
+            var applicationDbContext = _context.Movimentos
+                .Include(m => m.cliente)
+                .Where(m => m.TipoMovimento == "saida");
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -33,19 +32,46 @@ namespace EstoqueWeb.Controllers
                 return NotFound();
             }
 
-            var movimentoModel =  await _context.Movimentos
+            var movimentoModel = await _context.Movimentos
                 .Include(m => m.cliente)
                 .Include(m => m.EquipamentosModel)
                 .Where(m => m.TipoMovimento == "saida")
-                .FirstAsync(m => m.IdMovimento == id);
+                .FirstAsync(m => m.MovimentoId == id);
 
 
-            if ( movimentoModel== null)
+            if (movimentoModel == null)
             {
                 return NotFound();
             }
 
             return View(movimentoModel);
+        }
+        public IActionResult SaidaNovo()
+        {
+
+            ViewData["viewdatacliente"] = new SelectList(_context.Clientes, "ClienteId", "RazaoSocial");
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SaidaNovo(MovimentoModel movimentoModel)
+        {
+            movimentoModel.TipoMovimento = "saida";
+            movimentoModel.DataMovimento = DateTime.Now.ToString("dd/MM/yyyy");
+
+            _context.Movimentos.Add(movimentoModel);
+
+            if (await _context.SaveChangesAsync() > 0)
+            {
+                TempData["mensagem"] = MensagemModel.Serializar("Movimento de saída adicionado com sucesso.");
+            }
+            else
+            {
+                TempData["mensagem"] = MensagemModel.Serializar("Erro ao adicionar movimento.", TipoMensagem.Erro);
+            }
+
+            return RedirectToAction(nameof(Saida));
         }
 
         //public async Task<IActionResult> NovaSaida()
